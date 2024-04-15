@@ -11,7 +11,7 @@ function App() {
     fetch('/cats')
         .then(resp => {
           if (resp.ok) {
-            return resp.json.then(setCats)
+            return resp.json().then(setCats)
           }
           return resp.json().then(errorObj => toast.error(errorObj.message))
         })

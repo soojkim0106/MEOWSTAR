@@ -95,7 +95,6 @@ const Registration = () => {
 
   return (
     <div>
-      <Header />
       <h2>Log in or Sign up for Meowstar!</h2>
       <h3>{isLogin ? "Not a member of Meowstar?" : "Meowstar!"}</h3>
       <button onClick={() => setIsLogin((currentState) => !currentState)}>

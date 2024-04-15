@@ -1,22 +1,28 @@
 import {useEffect, useState} from 'react'
-import {useParams, useNavigate } from 'react-router-dom'
+import {useParams, useNavigate, useLocation } from 'react-router-dom'
 import toast from "react-hot-toast";
 
 const CatDetail = () => {
-  const [cat, setCat] = useState()
+  // const [cat, setCat] = useState(null)
+  const location = useLocation()
+  const {state:{cat}} = useLocation()
+  console.log(cat)
+  // const {catId} = useParams()
 
-  const {catId} = useParams()
+  // useEffect(() => {
+  //   fetch(`/cats/${catId}`)
+  //   .then(resp => {
+  //       if (resp.ok){
+  //           return resp.json().then(setCat)
+  //       }
+  //       return resp.json().then(errorObj => toast.error(errorObj.message))
+  //   })
+  //   .catch(error => console.log(error))
+  // }, [catId])
 
-  useEffect(() => {
-    fetch(`/cats/${catId}`)
-    .then(resp => {
-        if (resp.ok){
-            return resp.json().then(setCat)
-        }
-        return resp.json().then(errorObj => toast.error(errorObj.message))
-    })
-    .catch(error => console.log(error))
-  }, [catId])
+  if(!cat){
+    return <h2>Loading...</h2>
+  }
 
   const {
     name,

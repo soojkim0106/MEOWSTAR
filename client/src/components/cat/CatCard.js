@@ -6,8 +6,9 @@ const CatCard = ({cat}) => {
   console.log(cat)
   return (
     <div>
+        <p>CatCard: </p>
         <button>
-        <Link to={`/cats/${id}`}>
+        <Link to={`/cats/${id}`} state={{cat}}>
             <h3>{name}</h3>
             <img src={image} alt={name}/>
         </Link>
