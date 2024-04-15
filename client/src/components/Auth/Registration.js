@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import toast from "react-hot-toast";
 import { object, string } from "yup";
-import { useFormik } from "formik";
+import { useFormik, Formik } from "formik";
 import Header from "../navigation/Header";
 
 const signupSchema = object({
