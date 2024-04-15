@@ -46,13 +46,13 @@ const Registration = () => {
   const formik = useFormik({
     initialValues,
     validationSchemas: isLogin ? signinSchema : signupSchema,
-    onSubmit: (formData) => { debugger
+    onSubmit: (formData) => {
         fetch(requestedUrl, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.string(formData),
+            body: JSON.stringify(formData),
         }).then((resp) => {
             if (resp.ok) {
                 resp.json()
@@ -117,29 +117,29 @@ const Registration = () => {
           <form id="registrationForm" onSubmit={formik.handleSubmit}>
             {!isLogin && (
               <>
-                <label>Username</label>
+                <label>Email</label>
                 <input
                   type="text"
-                  name="username"
+                  name="email"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.username}
+                  value={formik.values.email}
                 />
-                {formik.errors.username && formik.touched.username && (
-                  <div className="error-message show">{formik.errors.username}</div>
+                {formik.errors.email && formik.touched.email && (
+                  <div className="error-message show">{formik.errors.email}</div>
                 )}
               </>
             )}
-            <label>Email </label>
+            <label>Username </label>
             <input
               type="text"
-              name="email"
+              name="username"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.email}
+              value={formik.values.username}
             />
-            {formik.errors.email && formik.touched.email && (
-              <div className="error-message show">{formik.errors.email}</div>
+            {formik.errors.username && formik.touched.username && (
+              <div className="error-message show">{formik.errors.username}</div>
             )}
             <label>Password </label>
             <input

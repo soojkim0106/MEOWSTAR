@@ -6,7 +6,7 @@ const CatDetail = () => {
   // const [cat, setCat] = useState(null)
   const location = useLocation()
   const {state:{cat}} = useLocation()
-  console.log(cat)
+
   // const {catId} = useParams()
 
   // useEffect(() => {
