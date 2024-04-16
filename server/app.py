@@ -3,9 +3,11 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, g, session
+from flask import request, g, session, send_file
 from flask_restful import Resource
 from functools import wraps
+
+import os
 
 # Local imports
 from config import app, db, api
@@ -42,6 +44,12 @@ def login_required(func):
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
+@app.route('/images/<path:image_path>')
+def get_image(image_path):
+    image_folder = './cat_pictures'
+    full_path = os.path.join(image_folder, image_path)
+    return send_file(full_path, mimetype='image/jpeg') 
 
 class Cats(Resource):
     def get(self):
