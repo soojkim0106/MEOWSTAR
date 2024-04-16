@@ -4,21 +4,29 @@ import "./CatCard.css";
 
 const CatCard = ({ cat }) => {
   const { id, name, image } = cat;
-  let src = useRef(null);
-
+  // let src = useRef(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    fetch(`/images/${image}`)
-      .then((data) => {
-        return data.blob();
-      })
-      .then((blob) => {
-        src.current = URL.createObjectURL(blob);
-        setImageLoaded(true);
-      })
-      .catch((error) => console.error("Error:", error));
-  }, [image]);
+    if (!imageUrl)
+      fetch(`/images/${image}`)
+        .then((data) => {
+          return data.blob();
+        })
+        .then((blob) => {
+          // src.current = URL.createObjectURL(blob);
+          const url = URL.createObjectURL(blob);
+          setImageUrl(url);
+          setImageLoaded(true);
+        })
+        .catch((error) => console.error("Error:", error));
+      return () => {
+        if (imageUrl) {
+          URL.revokeObjectURL(imageUrl);
+        }
+      };
+    }, []);
 
   return (
     <div className="cat-card">
@@ -26,7 +34,7 @@ const CatCard = ({ cat }) => {
       <button>
         <Link to={`/cats/${id}`} state={{ cat }}>
           <h3>{name}</h3>
-          {imageLoaded ? <img src={src.current} alt={name} /> : null}
+          {imageLoaded && imageUrl && <img src={imageUrl} alt={name} />}
         </Link>
       </button>
     </div>

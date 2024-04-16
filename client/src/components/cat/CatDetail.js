@@ -4,10 +4,32 @@ import toast from "react-hot-toast";
 
 const CatDetail = () => {
   // const [cat, setCat] = useState(null)
-  const location = useLocation()
-  const {state:{cat}} = useLocation()
+  const location = useLocation();
+  const { cat } = location.state;
 
-  // const {catId} = useParams()
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!imageUrl)
+      fetch(`/images/${image}`)
+        .then((data) => {
+          return data.blob();
+        })
+        .then((blob) => {
+          // src.current = URL.createObjectURL(blob);
+          const url = URL.createObjectURL(blob);
+          setImageUrl(url);
+          setImageLoaded(true);
+        })
+        .catch((error) => console.error("Error:", error));
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, []);
+
 
   // useEffect(() => {
   //   fetch(`/cats/${catId}`)
@@ -41,18 +63,18 @@ const CatDetail = () => {
   return (
     <div className="cat-detail-container">
       <h2>{name}</h2>
-        <img className="cat-image" src={image} alt={name}/>
-        <div className="details">
-          <p>Age: {age}</p>
-          <p>Gender: {gender}</p>
-          <p>Breed: {breed}</p>
-          <p>Temperament: {temperament}</p>
-          <p>Availability: {availability ? "Yes" : "No"}</p>
-          <p>Fixed: {fixed ? "Yes" : "No"}</p>
-          <p>Good with Children: {good_with_children ? "Yes" : "No"}</p>
-          <p>Good with Animals: {good_with_animal ? "Yes" : "No"}</p>
-        </ div>
-    </ div>
+      {imageLoaded && imageUrl && <img src={imageUrl} alt={name} />}
+      <div className="details">
+        <p>Age: {age}</p>
+        <p>Gender: {gender}</p>
+        <p>Breed: {breed}</p>
+        <p>Temperament: {temperament}</p>
+        <p>Availability: {availability ? "Yes" : "No"}</p>
+        <p>Fixed: {fixed ? "Yes" : "No"}</p>
+        <p>Good with Children: {good_with_children ? "Yes" : "No"}</p>
+        <p>Good with Animals: {good_with_animal ? "Yes" : "No"}</p>
+      </div>
+    </div>
   );
 }
 
