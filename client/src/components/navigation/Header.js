@@ -25,14 +25,14 @@ const Header = ({currentUser, updateCurrentUser}) => {
       <>
         {currentUser ? (
           <div className="container">
-            <Link to={`/users/${currentUser.id}`}>
+            <NavLink to={`/users/${currentUser.id}`}>
               Profile
-            </Link> <br></br>
-            <p onClick={handleLogout}>Logout</p>
+            </NavLink> <br></br>
+            <NavLink onClick={handleLogout}>Logout</NavLink>
           </div> 
         ) : (
           <Link to={"/registration"}>
-            Login
+            Login / Sign up
           </Link>
         )}
       </>

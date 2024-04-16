@@ -20,23 +20,23 @@ function App() {
 
   const updateCurrentUser = (user) => setCurrentUser(user)
 
-  useEffect(() => {
-    fetch("/me")
-    .then(resp => {
-      if (resp.ok) {
-        resp.json().then(updateCurrentUser)
+  // useEffect(() => {
+  //   fetch("/me")
+  //   .then(resp => {
+  //     if (resp.ok) {
+  //       resp.json().then(updateCurrentUser)
         
-      } else {
-        toast.error("Please log in")
-      }
-    })
-  }, []);
+  //     } else {
+  //       toast.error("Please log in")
+  //     }
+  //   })
+  // }, []);
 
   return(
     <>
       <Header currentUser={currentUser} updateCurrentUser={updateCurrentUser}/>
       <div><Toaster /></div>
-      <Outlet context ={{cats, currentUser, updateCurrentUser}}/>
+      <Outlet context ={{cats, currentUser, updateCurrentUser, setCurrentUser }}/>
     </>
   );
 }

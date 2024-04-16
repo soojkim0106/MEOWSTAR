@@ -52,7 +52,7 @@ const Registration = () => {
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify({email: formData.email, username: formData.username, password_hash: formData.password}),
         }).then((resp) => {
             if (resp.ok) {
                 resp.json()
