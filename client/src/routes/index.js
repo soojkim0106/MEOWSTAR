@@ -23,10 +23,10 @@ export const router = createBrowserRouter([
                 path: "registration",
                 element: <Registration />
             },
-            {
-                path: "cats/new",
-                element: <CatForm />
-            },
+            // {
+            //     path: "cats/new",
+            //     element: <CatForm />
+            // },
             {
                 path: "cats/:catId",
                 element: <CatDetail />
