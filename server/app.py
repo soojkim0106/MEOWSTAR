@@ -25,12 +25,14 @@ from schemas.adopt_foster_schema import adopt_foster_schema, adopt_fosters_schem
 
 @app.before_request
 def before_request():
-    path_dict = {"userbyid": User, "catbyid": Cat}
+    path_dict = {"userbyid": User, "catbyid": Cat, "adoptfosterbyid": AdoptFoster}
     if request.endpoint in path_dict:
 
         id = request.view_args.get("id")
         record = db.session.get(path_dict.get(request.endpoint), id)
         key_name = "user" if request.endpoint == "userbyid" else "cat"
+        if request.endpoint == 'adoptfosterbyid':
+            key_name = "adoptfostser"
         setattr(g, key_name, record)
         
 def login_required(func):
@@ -111,8 +113,6 @@ class CatById(Resource):
             db.session.rollback()
             return {"error": str(e)}, 404
 
-        
-
     #! For ADMIN to look
 class Users(Resource):
     def get(self):
@@ -174,6 +174,22 @@ class UserById(Resource):
         except Exception as e:
             db.session.rollback()
             return {"error": str(e)}, 404
+        
+class AdoptFosters(Resource):
+    @login_required   
+    def get(self):
+        try:
+            serialized_adopt_fosters = adopt_fosters_schema.dump(AdoptFoster.query)
+            return serialized_adopt_fosters, 200
+        except Exception as e:
+            return {"error": str(e)}, 404
+
+class AdoptFosterById(Resource):
+    def get(self, id):
+        try:
+            return adopt_foster_schema.dump(g.adoptfoster), 200
+        except Exception as e:
+            return {"error": str(e)}, 400
 
 @app.route("/signup", methods=["POST"])
 def signup():
@@ -230,6 +246,8 @@ api.add_resource(Cats, "/cats")
 api.add_resource(CatById, "/cats/<int:id>")
 api.add_resource(Users, "/users")
 api.add_resource(UserById, "/users/<int:id>")
+api.add_resource(AdoptFosters, "/adopt_fosters")
+api.add_resource(AdoptFosterById, "/adopt_fosters/<int:id>")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
