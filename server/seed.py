@@ -28,7 +28,7 @@ with app.app_context():
         gender="Male",
         breed="Persian",
         temperament="Calm",
-        image= "https://as1.ftcdn.net/v2/jpg/02/36/99/22/1000_F_236992283_sNOxCVQeFLd5pdqaKGh8DRGMZy7P4XKm.jpg",
+        image= "persian.jpg",
         good_with_children=True,
         good_with_animal=True,
         availability=True,
@@ -40,7 +40,7 @@ with app.app_context():
         gender="Female",
         breed="Siamese",
         temperament="Playful",
-        image= "https://as2.ftcdn.net/v2/jpg/03/03/62/45/1000_F_303624505_u0bFT1Rnoj8CMUSs8wMCwoKlnWlh5Jiq.jpg",
+        image= "siamese.jpg",
         good_with_children=True,
         good_with_animal=False,
         availability=True,
@@ -52,7 +52,7 @@ with app.app_context():
         gender="Female",
         breed="Maine Coon",
         temperament="Friendly",
-        image= "https://as2.ftcdn.net/v2/jpg/02/66/72/41/1000_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+        image= "maine_coon.jpg",
         good_with_children=False,
         good_with_animal=True,
         availability=True,
@@ -64,13 +64,205 @@ with app.app_context():
         gender="Male",
         breed="Scottish Fold",
         temperament="Timid",
-        image= "https://as1.ftcdn.net/v2/jpg/02/97/99/50/1000_F_297995004_KIRJlI4JXoOGdnk6fj8NMTC9Xvt7b5Im.jpg",
+        image= "scottish_fold.jpg",
         good_with_children=True,
         good_with_animal=True,
         availability=True,
         fixed=True
     )
-    cats = [c1, c2, c3, c4]
+    c5 = Cat(
+        name="Luna",
+        age=1,
+        gender="Female",
+        breed="Bengal",
+        temperament="Energetic",
+        image="bengal.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c6 = Cat(
+        name="Milo",
+        age=6,
+        gender="Male",
+        breed="Tabby",
+        temperament="Affectionate",
+        image="tabby.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=True
+    )
+    c7 = Cat(
+        name="Oreo",
+        age=4,
+        gender="Female",
+        breed="American Shorthair",
+        temperament="Independent",
+        image="american_shorthair.jpg",
+        good_with_children=False,
+        good_with_animal=True,
+        availability=True,
+        fixed=True
+    )
+    c8 = Cat(
+        name="Shadow",
+        age=1,
+        gender="Male",
+        breed="Russian Blue",
+        temperament="Curious",
+        image="russian_blue.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c9 = Cat(
+        name="Sauce",
+        age=2,
+        gender="Male",
+        breed="Ragdoll",
+        temperament="Gentle",
+        image="ragdoll.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=True
+    )
+    c10 = Cat(
+        name="Gom",
+        age=3,
+        gender="Female",
+        breed="Tuxedo",
+        temperament="Mischievous",
+        image="gom_tuxedo.jpg",
+        good_with_children=True,
+        good_with_animal=False,
+        availability=True,
+        fixed=True
+    )
+    c11 = Cat(
+        name="Semo",
+        age=1,
+        gender="Male",
+        breed="Tuxedo",
+        temperament="Playful",
+        image="semo_tuxedo.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c12 = Cat(
+        name="Smokey",
+        age=4,
+        gender="Male",
+        breed="Norwegian Forest Cat",
+        temperament="Reserved",
+        image="norwegian_forest.jpg",
+        good_with_children=False,
+        good_with_animal=True,
+        availability=True,
+        fixed=True
+    )
+    c13 = Cat(
+        name="Inky",
+        age=2,
+        gender="Female",
+        breed="Himalayan",
+        temperament="Sweet",
+        image="himalayan.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=True
+    )
+    c14 = Cat(
+        name="Fabio",
+        age=3,
+        gender="Male",
+        breed="Tabby",
+        temperament="Quirky",
+        image="orange.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=True
+    )
+    c15 = Cat(
+        name="Henry",
+        age=2,
+        gender="Female",
+        breed="Tuxedo",
+        temperament="Loyal",
+        image="henry_tuxedo.jpg",
+        good_with_children=True,
+        good_with_animal=False,
+        availability=True,
+        fixed=True
+    )
+    c16 = Cat(
+        name="Dweji",
+        age=4,
+        gender="Male",
+        breed="Tuxedo",
+        temperament="Adventurous",
+        image="dweji_tuxedo.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c17 = Cat(
+        name="Ralph",
+        age=15,
+        gender="Male",
+        breed="Maine Coon",
+        temperament="Charming",
+        image="ralph_maine_coon.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c18 = Cat(
+        name="Mochi",
+        age=1,
+        gender="Female",
+        breed="Siamese",
+        temperament="Playful",
+        image="mochi_siamese.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c19 = Cat(
+        name="Curly",
+        age=6,
+        gender="Male",
+        breed="Sphynx",
+        temperament="Curious",
+        image="hairless.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    c20 = Cat(
+        name="Lola",
+        age=12,
+        gender="Female",
+        breed="Ragdoll",
+        temperament="Elegant",
+        image="lola_ragdoll.jpg",
+        good_with_children=True,
+        good_with_animal=True,
+        availability=True,
+        fixed=False
+    )
+    cats = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20]
     db.session.add_all(cats)
     db.session.commit()
     
