@@ -18,7 +18,7 @@ const CatCard = ({ cat }) => {
         setImageLoaded(true);
       })
       .catch((error) => console.error("Error:", error));
-  }, []);
+  }, [image]);
 
   return (
     <div className="cat-card">
