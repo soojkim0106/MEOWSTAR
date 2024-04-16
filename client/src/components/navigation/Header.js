@@ -1,17 +1,42 @@
-import { Toaster } from 'react-hot-toast'
-import { NavLink, Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast'
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react"
 
-const Header = () => {
+const Header = ({currentUser, updateCurrentUser}) => {
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    fetch('/logout', {method:'DELETE'})
+    .then(() => {
+      updateCurrentUser(null)
+      toast.success("Logged out!")
+      navigate("/")
+    })
+    .catch(err => console.log(err))
+  }
+
   return (
     <>
     <Toaster />
     <nav className="navbar">
 
       <NavLink to='/'>Home</NavLink> <br></br>
-      <NavLink to='/users/:userId'>Profile</NavLink> <br></br>
-      <NavLink to='/registration'>Sign Up/Login</NavLink> <br></br>
-      <NavLink to='/fosteradopt/new'>Adopt/Foster</NavLink>
+      <>
+        {currentUser ? (
+          <div className="container">
+            <NavLink to={`/users/${currentUser.id}`}>
+              Profile
+            </NavLink> <br></br>
+            <NavLink onClick={handleLogout}>Logout</NavLink>
+          </div> 
+        ) : (
+          <Link to={"/registration"}>
+            Login / Sign up
+          </Link>
+        )}
+      </>
+      <NavLink to='/fosteradopt/new'>Adopt/Foster</NavLink><br></br>
     </nav>
     </>
   )

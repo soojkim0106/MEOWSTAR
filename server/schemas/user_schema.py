@@ -23,7 +23,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     
     username = fields.String(required=True, validate=validate.Length(min=2,max=20))
     email = fields.String(required=True, validate=[validate.Email()])
-    password_hash = fields.String(required=True, validate=validate.Length(min=5), load_only=True)
+    password_hash = fields.String(data_key="password_hash", required=True, validate=validate.Length(min=5), load_only=True)
     # interest = fields.String(required=False)
     
     @validates_schema

@@ -209,9 +209,9 @@ class AdoptFosterById(Resource):
 def signup():
     try: 
         data = request.json
-        # user = user_schema.load({"username":data.get("username"), "email":data.get("email")})
+        # user = user_schema.load({"username":data.get("username"), "email":data.get("email"), "password_hash": data.get("password_hash")})
         user = user_schema.load(data, partial=True)
-        # user.password_hash = data.get("password_hash")
+        # user.password_hash = data.get("_password_hash")
         db.session.add(user)
         db.session.commit()
         session["user_id"] = user.id
@@ -226,7 +226,7 @@ def login():
     try:
         data = request.json
         user = User.query.filter_by(username=data.get("username")).first()
-        if user and user.authenticate(data.get("password")):
+        if user and user.authenticate(data.get("password_hash")):
             session["user_id"] = user.id
             return user.to_dict(), 200
         else:

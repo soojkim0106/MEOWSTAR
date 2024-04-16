@@ -16,7 +16,7 @@ const CatContainer = () => {
 
   return (
     <div>
-        <p>Cat Container: </p>
+        <p></p>
         {cats.map((cat => (<CatCard key={cat.id} cat={cat}/>)))}
     </div>
   )

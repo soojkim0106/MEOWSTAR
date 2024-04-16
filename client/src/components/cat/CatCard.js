@@ -30,7 +30,6 @@ const CatCard = ({ cat }) => {
 
   return (
     <div className="cat-card">
-      <p>CatCard: </p>
       <button>
         <Link to={`/cats/${id}`} state={{ cat }}>
           <h3>{name}</h3>

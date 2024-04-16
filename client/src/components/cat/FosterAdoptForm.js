@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
@@ -5,13 +6,18 @@ import { number, object } from 'yup'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 
+
 // const adoptFosterSchema = object({
 //   adoption_fee: number()
 // });
 
+
 const FosterAdoptForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {updateCurrentUser} = useOutletContext()
+
+  const {currentUser, updateCurrentUser, addAdoptFosterForm} = useOutletContext()
+
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
@@ -61,6 +67,10 @@ const FosterAdoptForm = () => {
     },
   });
 
+  const fosterAdoptSchema = object({
+    catName: string().required(),
+    adoptionFee: number().min(0).max(250).required()
+  })
 
     useEffect(() => {
     fetch("/me")
@@ -124,6 +134,54 @@ const FosterAdoptForm = () => {
       </form>
     </div>
   );
-}
+
+//       <Formik
+//           initialValues={{catName: '', adoptionFee: ''}}
+//           validationSchema={fosterAdoptSchema}
+//           onSubmit={(values) => {
+//             fetch("/adoptfoster", {
+//               method: "POST",
+//               headers: {
+//                 "Content-Type": "application/json"
+//               },
+//               body: JSON.stringify({ ...values})
+//             })
+//             .then(resp => {
+//               if (resp.status === 201) {
+//                 resp.json().then(createdForm => {
+//                   addAdoptFosterForm(createdForm)
+//                   return createdForm
+//                 }).then(createdForm => navigate(`/adoptfoster/${createdForm.id}`))
+//               } else {
+//                 return resp.json().then(errorObj => toast.error(errorObj.message))
+//               }
+//             })
+//           }}
+//         >
+//           {({
+//             values,
+//             errors,
+//             touched,
+//             handleChange,
+//             handleBlur,
+//             handleSubmit,
+//             isSubmitting,
+//           }) => (
+//             <form onSubmit={handleSubmit}>
+//               <label>Cat Name </label>
+//               <input type='text' name='catName' onChange={handleChange} onBlur={handleBlur} value={values.catName}/>
+//               {errors.title && touched.title && <div className='error-message show'>{errors.title}</div>}
+
+//               <label> Adoption Fee</label>
+//               <input type='text' name='adoptionFee' onChange={handleChange} onBlur={handleBlur} value={values.AdoptionFee}/>
+//               {errors.genre && touched.genre && <div className='error-message show'>{errors.genre}</div>}
+
+//               <input type='submit' disabled={isSubmitting} />
+//             </form>
+//           )}
+//         </Formik> 
+//     </div>
+//   )
+// }
 
 export default FosterAdoptForm

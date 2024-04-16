@@ -34,9 +34,9 @@ function App() {
 
   return(
     <>
-      <Header />
+      <Header currentUser={currentUser} updateCurrentUser={updateCurrentUser}/>
       <div><Toaster /></div>
-      <Outlet context ={{cats, currentUser, updateCurrentUser}}/>
+      <Outlet context ={{cats, currentUser, updateCurrentUser, setCurrentUser }}/>
     </>
   );
 }

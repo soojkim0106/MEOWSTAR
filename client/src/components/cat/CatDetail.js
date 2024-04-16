@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {useParams, useNavigate, useLocation } from 'react-router-dom'
+import {Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import toast from "react-hot-toast";
 
 const CatDetail = () => {
@@ -74,6 +74,9 @@ const CatDetail = () => {
         <p>Good with Children: {good_with_children ? "Yes" : "No"}</p>
         <p>Good with Animals: {good_with_animal ? "Yes" : "No"}</p>
       </div>
+      <div>
+          <h3> Would you like to adopt or foster this cat? Let us know <Link to="/fosteradopt/new">here!</Link></h3>
+        </div>
     </div>
   );
 }
