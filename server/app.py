@@ -175,6 +175,7 @@ class UserById(Resource):
             db.session.rollback()
             return {"error": str(e)}, 404
         
+#! ADOPT FOSTER FORM ROUTES
 class AdoptFosters(Resource):
     @login_required   
     def get(self):
@@ -190,6 +191,19 @@ class AdoptFosterById(Resource):
             return adopt_foster_schema.dump(g.adoptfoster), 200
         except Exception as e:
             return {"error": str(e)}, 400
+        
+    def post(self, id):
+        try:
+            data = request.json
+            user_id = data.get('user_id')
+            cat_id = data.get('cat_id')
+            adoption_fee = data.get('adoption_fee')
+            adopt_foster = AdoptFoster(user_id=user_id, cat_id=cat_id, adoption_fee=adoption_fee)
+            db.session.add(adopt_foster)
+            db.session.commit()
+        except Exception as e:
+            return {"error": str(e)}
+        
 
 @app.route("/signup", methods=["POST"])
 def signup():
