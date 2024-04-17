@@ -21,7 +21,7 @@ class AdoptFoster(db.Model, SerializerMixin):
     #relationship
     cat = db.relationship("Cat", back_populates="adopt_fosters")
     user = db.relationship("User", back_populates="adopt_fosters")
-    
+
     #serialization
     serialize_rules = ("-cat.adopt_fosters", "-user.adopt_fosters",)
     
