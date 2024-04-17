@@ -2,19 +2,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react"
 
-const Header = ({currentUser, updateCurrentUser}) => {
-
-  const navigate = useNavigate()
-
-  const handleLogout = () => {
-    fetch('/logout', {method:'DELETE'})
-    .then(() => {
-      updateCurrentUser(null)
-      toast.success("Logged out!")
-      navigate("/")
-    })
-    .catch(err => console.log(err))
-  }
+const Header = ({currentUser , handleLogout}) => {
 
   return (
     <>
