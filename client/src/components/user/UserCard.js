@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import {
   useParams,
@@ -46,29 +47,8 @@ const UserCard = () => {
       });
     }
   }, [userId, currentUser, navigate, updateCurrentUser]);
-
-  // useEffect(() => {
-  //   const params = new URLSearchParams(window.location.search);
-  //   const catId = params.get("catId");
-  //   if (catId) {
-  //     fetch(`/cats/${catId}`)
-  //       .then((resp) => {
-  //         if (resp.ok) {
-  //           return resp.json();
-  //         } else {
-  //           throw new Error("Failed to fetch cat data");
-  //         }
-  //       })
-  //       .then((cat) => {
-  //         setAdoptedCat(cat);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   }
-  // }, [location.search]);
-
-  useEffect(() => {
+  
+    useEffect(() => {
     if (currentUser) {
       fetch(`/users/${currentUser.id}`)
         .then((resp) => {
@@ -111,25 +91,24 @@ const UserCard = () => {
         });
     }
   }, [currentUser]);
-  // const onAddNewCat = (newCat) => {
-  //   setAdoptedCatList([...adoptedCatList, newCat]);
-  // };
 
-  const initialValues = {
-    email: "",
-    username: "",
-  };
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema: updateProfileSchema,
-    onSubmit: (formData) => {
-      handleEditUser(formData);
-    },
-  });
+    const initialValues = {
+      email: "",
+      username: "",
+    }
+  
+    const formik = useFormik({
+      initialValues,
+      validationSchema: updateProfileSchema,
+      onSubmit: 
+      (formData) => { 
+          handleEditUser(formData)
+      },
+    });
 
-  if (!currentUser) {
-    return <p>You must log in first</p>;
+  if(!currentUser){
+    return <p>You must log in first</p>
   }
   const { username, email } = currentUser;
 

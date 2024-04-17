@@ -26,12 +26,12 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     password_hash = fields.String(data_key="password_hash", required=True, validate=validate.Length(min=5), load_only=True)
     # interest = fields.String(required=False)
     
-    @validates_schema
-    def validate_email(self, data, **kwargs):
-        email = data.get("email")
+    # @validates_schema
+    # def validate_email(self, data, **kwargs):
+    #     email = data.get("email")
         
-        if User.query.filter_by(email=email).first():
-            raise ValidationError(f"Email {email} already exists.") #! EXTRACT ONLY THE STRING
+    #     if User.query.filter_by(email=email).first():
+    #         raise ValidationError(f"Email {email} already exists.") #! EXTRACT ONLY THE STRING
     
     def load(self, data, instance=None, *, partial=False, **kwargs):
         loaded_instance = super().load(
