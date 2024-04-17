@@ -4,8 +4,36 @@
 
 .edit-profile-form{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: relative
+
 }
 
 .delete-user{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.adopt_foster_cat_box{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: relative
+
+}
+
+.user-profile{
+    position: relative
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff7b7;
+    color: black;
+    text-align: center;
+ }
+
+.profile-submit{
+    margin-top: 5px;
 }

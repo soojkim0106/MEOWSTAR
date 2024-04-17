@@ -92,8 +92,8 @@ const UserCard = () => {
 
 
     const initialValues = {
-      email: "",
-      username: "",
+      email: currentUser.email,
+      username: currentUser.username,
     }
   
     const formik = useFormik({
@@ -136,58 +136,62 @@ const UserCard = () => {
 
   return (
     <>
+    <div className="user-profile">
       <div className="user-information">
         <h1>{username}'s profile:</h1>
         <h3>Registered Email: {email}</h3>
       </div>
-      <br></br>
-      <br></br>
-      <div>
-        <h3>Adopted/Fostered Cat:</h3>
-        {adoptedCatList.map((adoptedCat) => (
-          <CatCard cat={adoptedCat}></CatCard>
-        ))}
+      <div className="adopt_foster_cat_box">
+        <div className='testing'>
+          <h3>Adopted/Fostered Cat:</h3>
+          {adoptedCatList.map((adoptedCat) => (
+            <CatCard cat={adoptedCat}></CatCard>
+          ))}
+        </div>
       </div>
-      <br></br>
-      <br></br>
-      <div className="edit-profile-form">
-        <h3>Update your profile:</h3>
-        <button onClick={toggleForm}>{showForm}Show Form</button>
-        {showForm && (
-          <form onSubmit={formik.handleSubmit}>
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.errors.email && formik.touched.email && (
-              <div className="error-message show">{formik.errors.email}</div>
-            )}
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-            />
-            {formik.errors.username && formik.touched.username && (
-              <div className="error-message show">{formik.errors.username}</div>
-            )}
-            <button type="submit">Submit</button>
-          </form>
-        )}
+      <div className='footer'>
+        <div className="edit-profile-form">
+          <h3>Update your profile:</h3>
+          <button onClick={toggleForm} >{showForm}Show Form</button>
+          {showForm && (
+            <form onSubmit={formik.handleSubmit}>
+              <label>Email: </label>
+              <input
+                type="text"
+                name="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                className="input-email"
+              /> <br></br>
+              {formik.errors.email && formik.touched.email && (
+                <div className="error-message show">{formik.errors.email}</div>
+              )}
+              <label>Username: </label>
+              <input
+                type="text"
+                name="username"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+                className="input-username"
+              />
+              {formik.errors.username && formik.touched.username && (
+                <div className="error-message show">{formik.errors.username}</div>
+              )}
+              <br></br>
+              <button type="submit" className="profile-submit">Submit</button>
+            </form>
+          )}
+        </div>
+        <div className="delete-user">
+          <h3>Delete your profile:</h3>
+          <button style={buttonStyle} onClick={handleDoubleCheck}>
+            {" "}
+            Delete ⚠️
+          </button>
+        </div>
       </div>
-      <br></br>
-      <div className="delete-user">
-        <h3>Delete your profile:</h3>
-        <button style={buttonStyle} onClick={handleDoubleCheck}>
-          {" "}
-          Delete ⚠️
-        </button>
       </div>
     </>
   );
