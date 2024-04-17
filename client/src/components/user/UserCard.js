@@ -59,14 +59,10 @@ const UserCard = () => {
           }
         })
         .then((userData) => {
-          // Check if userData.adopt_fosters exists and is an array
           if (userData.adopt_fosters && Array.isArray(userData.adopt_fosters)) {
-            // Extract the IDs of the adopted cats
             const adoptedCatIds = userData.adopt_fosters.map((adoptedCat) => {
               return adoptedCat.id;
             });
-
-            // Fetch cat data for each adopted cat
             Promise.all(
               adoptedCatIds.map((catId) =>
                 fetch(`/cats/${catId}`).then((resp) => resp.json())
