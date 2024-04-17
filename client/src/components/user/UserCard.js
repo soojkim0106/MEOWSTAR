@@ -9,8 +9,8 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { object, string } from "yup";
 import { useFormik, Formik } from "formik";
-import './UserCard.css'
 import CatCard from "../cat/CatCard";
+import './UserCard.css'
 
 
 const UserCard = () => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import './CatCard.css'
 
 
 const CatCard = ({ cat }) => {

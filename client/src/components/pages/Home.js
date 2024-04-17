@@ -6,7 +6,7 @@ function Home() {
   return (
     <div>
       <>
-        <h1 class="title">Welcome to Meowstar!</h1>
+        <h1 className="title">Welcome to Meowstar!</h1>
         <CatContainer />
       </>
     </div>
