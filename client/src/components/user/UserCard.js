@@ -42,8 +42,8 @@ const UserCard = () => {
     }}, [userId, currentUser, navigate, updateCurrentUser]);
 
     const initialValues = {
-      email: currentUser.email,
-      username: currentUser.username,
+      email: "",
+      username: "",
     }
   
     const formik = useFormik({
@@ -52,27 +52,6 @@ const UserCard = () => {
       onSubmit: 
       (formData) => { 
           handleEditUser(formData)
-        // try { 
-        //   fetch(`/users/${currentUser.id}`, {
-        //     method: "PATCH",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(formData),
-        //   }).then((resp) => {
-        //     if (resp.ok) {
-        //       resp.json().then((user) => {
-        //         updateCurrentUser(user);
-        //       });
-        //     } else {
-        //       return resp
-        //         .json()
-        //         .then((errorObj) => toast.error(errorObj.message));
-        //     }
-        //   });
-        // } catch (err) {
-        //   throw err;
-        // }
       },
     });
 
