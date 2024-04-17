@@ -46,8 +46,7 @@ const FosterAdoptForm = () => {
         }
       })
       .then((data) => {
-        const { cat_id } = data;
-        navigate(`/users/${id}?catId=${cat_id}`);
+        navigate(`/users/${id}`);
       })
       .catch((error) => {
         toast.error("An error occurred. Please try again.");

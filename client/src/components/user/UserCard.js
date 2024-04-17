@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, useOutletContext, useLocation } from "react-router-dom";
+import {
+  useParams,
+  useNavigate,
+  useOutletContext,
+  useLocation,
+} from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { object, string } from "yup";
 import { useFormik, Formik } from "formik";
+import CatCard from "../cat/CatCard";
 
 const UserCard = () => {
   const { currentUser, updateCurrentUser, handleLogout, handleEditUser } =
@@ -10,9 +16,7 @@ const UserCard = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
   const [showForm, setShowForm] = useState(false);
-  const [adoptedCat, setAdoptedCat] = useState(null);
-  // const [catList, setCatList] = useState([]);
-
+  const [adoptedCatList, setAdoptedCatList] = useState([]);
   const location = useLocation();
 
   const updateProfileSchema = object({
@@ -43,35 +47,77 @@ const UserCard = () => {
     }
   }, [userId, currentUser, navigate, updateCurrentUser]);
 
-    useEffect(() => {
-      const params = new URLSearchParams(window.location.search);
-      const catId = params.get("catId");
-      console.log("catId:", catId);
-      if (catId) {
-        fetch(`/cats/${catId}`)
-          .then((resp) => {
-            if (resp.ok) {
-              return resp.json();
-            } else {
-              throw new Error("Failed to fetch cat data");
-            }
-          })
-          .then((cat) => {
-            setAdoptedCat(cat);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-    }, [location.search]);
+  // useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const catId = params.get("catId");
+  //   if (catId) {
+  //     fetch(`/cats/${catId}`)
+  //       .then((resp) => {
+  //         if (resp.ok) {
+  //           return resp.json();
+  //         } else {
+  //           throw new Error("Failed to fetch cat data");
+  //         }
+  //       })
+  //       .then((cat) => {
+  //         setAdoptedCat(cat);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   }
+  // }, [location.search]);
 
-    // const onAddNewCat = (newCat) => {
-    //   setCatList([...catList, newCat]);
-    // };
+  useEffect(() => {
+    if (currentUser) {
+      fetch(`/users/${currentUser.id}`)
+        .then((resp) => {
+          if (resp.ok) {
+            return resp.json();
+          } else {
+            throw new Error("Failed to fetch user data");
+          }
+        })
+        .then((userData) => {
+          // Check if userData.adopt_fosters exists and is an array
+          if (userData.adopt_fosters && Array.isArray(userData.adopt_fosters)) {
+            // Extract the IDs of the adopted cats
+            const adoptedCatIds = userData.adopt_fosters.map((adoptedCat) => {
+              return adoptedCat.id;
+            });
+
+            // Fetch cat data for each adopted cat
+            Promise.all(
+              adoptedCatIds.map((catId) =>
+                fetch(`/cats/${catId}`).then((resp) => resp.json())
+              )
+            )
+              .then((catsData) => {
+                // Update adoptedCatList with cat data
+                console.log(catsData);
+                setAdoptedCatList(catsData);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          } else {
+            console.error(
+              "userData.adopt_fosters is not an array or is undefined"
+            );
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [currentUser]);
+  // const onAddNewCat = (newCat) => {
+  //   setAdoptedCatList([...adoptedCatList, newCat]);
+  // };
 
   const initialValues = {
-    email: '',
-    username: '',
+    email: "",
+    username: "",
   };
 
   const formik = useFormik({
@@ -119,13 +165,12 @@ const UserCard = () => {
       </div>
       <br></br>
       <br></br>
-      {adoptedCat && (
       <div>
         <h3>Adopted/Fostered Cat:</h3>
-        {/* <img src={}/> */}
-        <p>Name: {adoptedCat.name}</p>
+        {adoptedCatList.map((adoptedCat) => (
+          <CatCard cat={adoptedCat}></CatCard>
+        ))}
       </div>
-      )}
       <br></br>
       <br></br>
       <div className="edit-profile-form">
