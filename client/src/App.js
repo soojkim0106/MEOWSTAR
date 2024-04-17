@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useParams, useNavigate } from "react-router-dom";
+
 import toast ,{Toaster} from 'react-hot-toast'
 import Home from "./components/pages/Home";
 import Header from "./components/navigation/Header";
+import UserCard from "./components/user/UserCard";
+
 function App() {
   const [cats, setCats] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
@@ -68,7 +71,8 @@ const handleLogout = () => {
     }
   }
 
-  return(
+
+  return (
     <>
       <Header currentUser={currentUser} updateCurrentUser={updateCurrentUser} handleLogout={handleLogout}/>
       <div><Toaster /></div>

@@ -1,18 +1,18 @@
-
-import { useState, useEffect } from 'react'
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
-import toast, {Toaster} from 'react-hot-toast'
-import { number, object } from 'yup'
-import { useFormik } from 'formik';
+import { useState, useEffect } from "react";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { number, object } from "yup";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import './FosterAdoptForm.css'
 
 const FosterAdoptForm = () => {
 
-  const {updateCurrentUser} = useOutletContext();
-  let { catId, userid } = useParams();
+  const { currentUser, updateCurrentUser } = useOutletContext();
+
   const navigate = useNavigate();
-  
+  const { catId } = useParams();
+
   const formik = useFormik({
     initialValues: {
       adopt: false,
@@ -22,18 +22,23 @@ const FosterAdoptForm = () => {
       adopt: Yup.boolean(),
       foster: Yup.boolean(),
     }),
-      onSubmit: (formData) => {
-        submitForm(formData);
+    onSubmit: (formData) => {
+      submitForm(formData);
     },
   });
 
   const submitForm = (formData) => {
+    const { id } = currentUser;
     fetch("/adopt_fosters", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        ...formData,
+        user_id: id,
+        cat_id: Number.parseInt(catId),
+      }),
     })
       .then((resp) => {
         if (resp.ok) {
@@ -43,14 +48,15 @@ const FosterAdoptForm = () => {
         }
       })
       .then((data) => {
-        const { cat_id } = data;
-        navigate(`/users/${userid}?catId=${cat_id}`);
+        navigate(`/users/${id}`);
       })
       .catch((error) => {
         toast.error("An error occurred. Please try again.");
         console.error(error);
       });
   };
+
+
 
   useEffect(() => {
     fetch("/me").then((resp) => {
@@ -61,8 +67,7 @@ const FosterAdoptForm = () => {
         navigate("/");
       }
     });
-  }, [updateCurrentUser, navigate]);
-
+  }, []);
 
   return (
     <div className="foster-adopt-form">
@@ -88,12 +93,11 @@ const FosterAdoptForm = () => {
             checked={formik.values.foster}
           />
         </label>
-        <button type="submit">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
 }
 
 export default FosterAdoptForm
+

@@ -1,9 +1,8 @@
-import toast, { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react"
+import { useState } from "react";
 
-const Header = ({currentUser , handleLogout}) => {
-
+const Header = ({ currentUser, handleLogout }) => {
   return (
     <>
     <Toaster />
@@ -28,7 +27,7 @@ const Header = ({currentUser , handleLogout}) => {
       </nav>
     </div>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
