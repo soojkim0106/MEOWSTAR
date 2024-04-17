@@ -8,16 +8,16 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
-  fetch("/me")
-  .then(resp => {
-    if (resp.ok) {
-      resp.json().then(updateCurrentUser)
-    } else {
-      toast.error("Please log in!")
-    }
-  })
-}, []);
+//   useEffect(() => {
+//   fetch("/me")
+//   .then(resp => {
+//     if (resp.ok) {
+//       resp.json().then(updateCurrentUser)
+//     } else {
+//       toast.error("Please log in!")
+//     }
+//   })
+// }, []);
 
   useEffect(() => {
     fetch('/cats')
@@ -44,7 +44,7 @@ const handleLogout = () => {
 
   const updateCurrentUser = (user) => setCurrentUser(user)
 
-  const handleEditUser = (formData) => {
+  const handleEditUser = (formData) => { 
     try { 
       fetch(`/users/${currentUser.id}`, {
         method: "PATCH",

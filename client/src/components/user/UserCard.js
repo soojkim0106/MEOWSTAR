@@ -8,7 +8,7 @@ import { useFormik, Formik } from "formik";
 
 const UserCard = () => {
 
-  const {currentUser, updateCurrentUser, handleLogout, handleEditUser } = useOutletContext()
+  const {currentUser, updateCurrentUser, handleLogout, handleEditUser} = useOutletContext()
   const navigate = useNavigate()
   const { userId } = useParams()
   const [showForm, setShowForm] = useState(false)
@@ -42,8 +42,8 @@ const UserCard = () => {
     }}, [userId, currentUser, navigate, updateCurrentUser]);
 
     const initialValues = {
-      username: currentUser.username,
       email: currentUser.email,
+      username: currentUser.username,
     }
   
     const formik = useFormik({

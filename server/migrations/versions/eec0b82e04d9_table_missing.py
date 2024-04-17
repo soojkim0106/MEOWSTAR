@@ -1,8 +1,8 @@
-"""updated table
+"""table missing
 
-Revision ID: 481d33cb18a4
+Revision ID: eec0b82e04d9
 Revises: 
-Create Date: 2024-04-17 09:13:01.502550
+Create Date: 2024-04-17 09:46:02.181948
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '481d33cb18a4'
+revision = 'eec0b82e04d9'
 down_revision = None
 branch_labels = None
 depends_on = None
