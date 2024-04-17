@@ -5,21 +5,27 @@ import { useState } from "react";
 const Header = ({ currentUser, handleLogout }) => {
   return (
     <>
-      <Toaster />
+    <Toaster />
+    <div className='navigation'>
       <nav className="navbar">
-        <NavLink to="/">Home</NavLink> <br></br>
+
+        <NavLink to='/'>Home</NavLink> <br></br>
         <>
           {currentUser ? (
             <div className="container">
-              <NavLink to={`/users/${currentUser.id}`}>Profile</NavLink>{" "}
-              <br></br>
+              <NavLink to={`/users/${currentUser.id}`}>
+                Profile
+              </NavLink> <br></br>
               <NavLink onClick={handleLogout}>Logout</NavLink>
-            </div>
+            </div> 
           ) : (
-            <Link to={"/registration"}>Login / Sign up</Link>
+            <Link to={"/registration"}>
+              Login / Sign up
+            </Link>
           )}
         </>
       </nav>
+    </div>
     </>
   );
 };

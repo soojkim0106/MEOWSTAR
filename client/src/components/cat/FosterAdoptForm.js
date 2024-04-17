@@ -4,8 +4,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { number, object } from "yup";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import './FosterAdoptForm.css'
 
 const FosterAdoptForm = () => {
+
   const { currentUser, updateCurrentUser } = useOutletContext();
 
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ const FosterAdoptForm = () => {
   }, []);
 
   return (
-    <div>
+    <div className="foster-adopt-form">
       <h1>Interested in Adopting or Fostering?</h1>
       <form onSubmit={formik.handleSubmit}>
         <label>
@@ -95,6 +97,7 @@ const FosterAdoptForm = () => {
       </form>
     </div>
   );
-};
+}
 
-export default FosterAdoptForm;
+export default FosterAdoptForm
+
