@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
                 element: <CatDetail />
             },
             {
-                path: "fosteradopt/new",
+                path: "fosteradopt/:catId",
                 element: <FosterAdoptForm />
             },
             {

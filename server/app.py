@@ -184,6 +184,21 @@ class AdoptFosters(Resource):
             return serialized_adopt_fosters, 200
         except Exception as e:
             return {"error": str(e)}, 404
+        
+    def post(self):
+        try:
+            data = request.json
+            user_id = session.get('user_id')
+            cat_id = data.get('cat_id')
+            adopt = data.get('adopt')
+            foster = data.get('foster')
+            adopt_foster = AdoptFoster(user_id=user_id, cat_id=cat_id, adopt=adopt, foster=foster)
+            db.session.add(adopt_foster)
+            db.session.commit()
+            response_data = {"message": "Adoption/fostering preference saved successfully", "cat_id": adopt_foster.cat_id}
+            return response_data, 201
+        except Exception as e:
+            return {"error": str(e)}
 
 class AdoptFosterById(Resource):
     def get(self, id):
@@ -191,19 +206,6 @@ class AdoptFosterById(Resource):
             return adopt_foster_schema.dump(g.adoptfoster), 200
         except Exception as e:
             return {"error": str(e)}, 400
-        
-    def post(self, id):
-        try:
-            data = request.json
-            user_id = data.get('user_id')
-            cat_id = data.get('cat_id')
-            adoption_fee = data.get('adoption_fee')
-            adopt_foster = AdoptFoster(user_id=user_id, cat_id=cat_id, adoption_fee=adoption_fee)
-            db.session.add(adopt_foster)
-            db.session.commit()
-        except Exception as e:
-            return {"error": str(e)}
-        
 
 @app.route("/signup", methods=["POST"])
 def signup():

@@ -1,92 +1,72 @@
 
 import { useState, useEffect } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import { number, object } from 'yup'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 
-
-// const adoptFosterSchema = object({
-//   adoption_fee: number()
-// });
-
-
 const FosterAdoptForm = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const {updateCurrentUser} = useOutletContext()
-
-  const {currentUser, updateCurrentUser, addAdoptFosterForm} = useOutletContext()
-
-  const navigate = useNavigate()
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [showAdoptionPopup, setShowAdoptionPopup] = useState(false);
+  const {updateCurrentUser} = useOutletContext();
+  let { catId, userid } = useParams();
+  const navigate = useNavigate();
+  
   const formik = useFormik({
     initialValues: {
       adopt: false,
       foster: false,
-      adoption_fee: 0,
     },
     validationSchema: Yup.object({
       adopt: Yup.boolean(),
       foster: Yup.boolean(),
-      adoption_fee: Yup.number().test(
-        "conditional-validation",
-        "Adoption fee is required if adopting",
-        function (value) {
-          const { adopt, foster } = this.parent;
-          if (adopt || foster) {
-            return value !== undefined && value !== null && value !== "";
-          }
-          return true; // No validation when neither adopt nor foster is true
-        }
-      ),
     }),
-    onSubmit: (formData) => {
-      setIsSubmitting(true);
-      fetch("/adopt_fosters", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((resp) => {
-          if (resp.ok) {
-            navigate(`/`);
-          } else {
-            return resp.json().then((error) => {
-              toast.error(error.message);
-            });
-          }
-        })
-        .catch((error) => {
-          toast.error("An error occurred. Please try again.");
-        })
-        .finally(() => {
-          setIsSubmitting(false);
-        });
+      onSubmit: (formData) => {
+        submitForm(formData);
     },
   });
 
-  const fosterAdoptSchema = object({
-    catName: string().required(),
-    adoptionFee: number().min(0).max(250).required()
-  })
-
-    useEffect(() => {
-    fetch("/me")
-    .then(resp => {
-      if (resp.ok) {
-        resp.json().then(updateCurrentUser)
-        
-      } else {
-        toast.error("Please log in")
-        navigate('/')
-      }
+  const submitForm = (formData) => {
+    fetch("/adopt_fosters", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        } else {
+          throw new Error("Failed to submit form");
+        }
+      })
+      .then((data) => {
+        const { cat_id } = data;
+        navigate(`/users/${userid}?catId=${cat_id}`);
+      })
+      .catch((error) => {
+        toast.error("An error occurred. Please try again.");
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    fetch("/me").then((resp) => {
+      if (resp.ok) {
+        resp.json().then(updateCurrentUser);
+      } else {
+        toast.error("Please log in");
+        navigate("/");
+      }
+    });
   }, []);
 
-  // onSubmit/handleSubmit should include <Link to={`/users/${userId}`} />
-
+  // const handleAdoptionConfirmation = () => {
+  //   setShowAdoptionPopup(false); // Hide the adoption confirmation popup
+  //   submitForm(formik.values); // Submit the form after confirmation
+  // };
 
   return (
     <div>
@@ -112,28 +92,38 @@ const FosterAdoptForm = () => {
             checked={formik.values.foster}
           />
         </label>
-        {formik.values.adopt && (
-          <div>
-            <label htmlFor='adoption_fee'>Adoption Fee</label>
-            <input
-              type="number"
-              id="adoption_fee"
-              name="adoption_fee"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.adoption_fee}
-            />
-            {formik.touched.adoption_fee && formik.errors.adoption_fee ? (
-              <div>{formik.errors.adoption_fee}</div>
-            ) : null}
-          </div>
-        )}
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit">
           Submit
         </button>
       </form>
+      {/* {showAdoptionPopup && (
+        <div className="adoption-popup">
+          <p>Are you sure you want to adopt this cat?</p>
+          <p>An adoption fee of $80 will be applied.</p>
+          <button onClick={handleAdoptionConfirmation}>Yes, I'm sure</button>
+          <button onClick={() => setShowAdoptionPopup(false)}>Cancel</button>
+        </div>
+      )} */}
     </div>
   );
+
+
+    // validationSchema: Yup.object({
+    //   adopt: Yup.boolean(),
+    //   foster: Yup.boolean(),
+    //   adoption_fee: Yup.number().test(
+    //     "conditional-validation",
+    //     "Adoption fee is required if adopting",
+    //     function (value) {
+    //       const { adopt, foster } = this.parent;
+    //       if (adopt || foster) {
+    //         return value !== undefined && value !== null && value !== "";
+    //       }
+    //       return true; // No validation when neither adopt nor foster is true
+    //     }
+    //   ),
+    // }),
+
 
 //       <Formik
 //           initialValues={{catName: '', adoptionFee: ''}}
@@ -182,6 +172,6 @@ const FosterAdoptForm = () => {
 //         </Formik> 
 //     </div>
 //   )
-// }
+}
 
 export default FosterAdoptForm

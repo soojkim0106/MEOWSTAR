@@ -1,8 +1,8 @@
-"""initial migration
+"""update tables
 
-Revision ID: fca0c42617fb
+Revision ID: 1449822ea596
 Revises: 
-Create Date: 2024-04-15 09:30:59.957995
+Create Date: 2024-04-16 16:20:13.953064
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fca0c42617fb'
+revision = '1449822ea596'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,6 +30,7 @@ def upgrade():
     sa.Column('good_with_animal', sa.Boolean(), nullable=True),
     sa.Column('availability', sa.Boolean(), nullable=True),
     sa.Column('fixed', sa.Boolean(), nullable=True),
+    sa.Column('adoption_fee', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -50,7 +51,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('cat_id', sa.Integer(), nullable=True),
-    sa.Column('adoption_fee', sa.Integer(), nullable=False),
+    sa.Column('adopt', sa.Boolean(), nullable=True),
+    sa.Column('foster', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['cat_id'], ['cats.id'], ),

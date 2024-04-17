@@ -32,7 +32,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c2 = Cat(
         name="Mittens",
@@ -44,7 +45,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=False,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c3 = Cat(
         name="Pickles",
@@ -56,7 +58,8 @@ with app.app_context():
         good_with_children=False,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c4 = Cat(
         name="Socks",
@@ -68,7 +71,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c5 = Cat(
         name="Luna",
@@ -80,7 +84,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c6 = Cat(
         name="Milo",
@@ -92,7 +97,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c7 = Cat(
         name="Oreo",
@@ -104,7 +110,8 @@ with app.app_context():
         good_with_children=False,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c8 = Cat(
         name="Shadow",
@@ -116,7 +123,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c9 = Cat(
         name="Sauce",
@@ -128,7 +136,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c10 = Cat(
         name="Gom",
@@ -140,7 +149,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=False,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c11 = Cat(
         name="Semo",
@@ -152,7 +162,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c12 = Cat(
         name="Smokey",
@@ -164,7 +175,8 @@ with app.app_context():
         good_with_children=False,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c13 = Cat(
         name="Inky",
@@ -176,7 +188,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c14 = Cat(
         name="Fabio",
@@ -188,7 +201,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c15 = Cat(
         name="Henry",
@@ -200,7 +214,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=False,
         availability=True,
-        fixed=True
+        fixed=True,
+        adoption_fee=80
     )
     c16 = Cat(
         name="Dweji",
@@ -212,7 +227,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c17 = Cat(
         name="Ralph",
@@ -224,7 +240,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c18 = Cat(
         name="Mochi",
@@ -236,7 +253,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c19 = Cat(
         name="Curly",
@@ -248,7 +266,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     c20 = Cat(
         name="Lola",
@@ -260,7 +279,8 @@ with app.app_context():
         good_with_children=True,
         good_with_animal=True,
         availability=True,
-        fixed=False
+        fixed=False,
+        adoption_fee=80
     )
     cats = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20]
     db.session.add_all(cats)

@@ -28,6 +28,7 @@ class CatSchema(ma.SQLAlchemyAutoSchema):
     image = fields.String(validate=validate.Regexp(
         r".*\.(jpeg|png|jpg)", error="File URI must be in JPEG, JPG, or PNG format"
         ),)
+    adoption_fee = fields.Integer(validate=validate.Range(min=0, max=250))
 
 #!For ONE cat
 cat_schema = CatSchema()

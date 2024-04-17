@@ -22,7 +22,6 @@ class AdoptFosterSchema(ma.SQLAlchemyAutoSchema):
             many=True,
         )
         
-        adoption_fee = fields.Integer(validate=validate.Range(min=0, max=250))
         user_id = fields.Integer(required=True)
         cat_id = fields.Integer(required=True)
         

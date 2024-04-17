@@ -57,6 +57,7 @@ const CatDetail = () => {
     fixed,
     good_with_children,
     good_with_animal,
+    adoption_fee,
     id
   } = cat;
 
@@ -73,9 +74,10 @@ const CatDetail = () => {
         <p>Fixed: {fixed ? "Yes" : "No"}</p>
         <p>Good with Children: {good_with_children ? "Yes" : "No"}</p>
         <p>Good with Animals: {good_with_animal ? "Yes" : "No"}</p>
+        <p>Adoption Fee: {adoption_fee} </p>
       </div>
       <div>
-          <h3> Would you like to adopt or foster this cat? Let us know <Link to="/fosteradopt/new">here!</Link></h3>
+          <h3> Would you like to adopt or foster this cat? Let us know <Link to={`/fosteradopt/${id}`}>here!</Link></h3>
         </div>
     </div>
   );
