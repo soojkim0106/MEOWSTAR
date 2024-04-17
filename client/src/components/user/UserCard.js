@@ -3,6 +3,7 @@ import { useParams, useNavigate, useOutletContext } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import { object, string } from "yup";
 import { useFormik, Formik } from "formik";
+import './UserCard.css'
 
 
 
