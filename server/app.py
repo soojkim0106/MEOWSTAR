@@ -198,7 +198,7 @@ class AdoptFosters(Resource):
             response_data = {"message": "Adoption/fostering preference saved successfully", "cat_id": adopt_foster.cat_id}
             return response_data, 201
         except Exception as e:
-            return {"error": str(e)}
+            return {"error": str(e)}, 400
 
 class AdoptFosterById(Resource):
     def get(self, id):

@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react'
-import {Link, useParams, useNavigate, useLocation } from 'react-router-dom'
+import {Link, useLocation } from 'react-router-dom'
 import toast from "react-hot-toast";
 
 const CatDetail = () => {
-  // const [cat, setCat] = useState(null)
   const location = useLocation();
   const { cat } = location.state;
 

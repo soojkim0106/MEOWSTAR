@@ -1,10 +1,13 @@
 import toast, { Toaster } from 'react-hot-toast'
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react"
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 const Header = ({currentUser, updateCurrentUser}) => {
 
   const navigate = useNavigate()
+
 
   const handleLogout = () => {
     fetch('/logout', {method:'DELETE'})

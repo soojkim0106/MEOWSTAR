@@ -304,5 +304,20 @@ with app.app_context():
     db.session.add_all(users)
     db.session.commit()
 
+    af1 = AdoptFoster(
+        user_id=1,
+        cat_id=15,
+        adopt=True,
+        foster=False,
+    )
+    af2 = AdoptFoster(
+        user_id=2,
+        cat_id=10,
+        adopt=True,
+        foster=False,
+    )
+    adopt_fosters = [af1, af2]
+    db.session.add_all(adopt_fosters)
+    db.session.commit()
 
     print("Completed seeding...")
