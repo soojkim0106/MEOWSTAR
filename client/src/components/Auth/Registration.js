@@ -59,7 +59,9 @@ const Registration = () => {
                 .then(updateCurrentUser)
                 .then(() => {
                 navigate("/");
-                toast.success("Meowstar!");
+                toast('Meowster', {
+                  icon:'🐱'
+                });
                 });
             } else {
             return resp.json().then((errorObj) => toast.error(errorObj.message));
