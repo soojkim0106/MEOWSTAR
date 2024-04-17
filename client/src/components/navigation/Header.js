@@ -24,7 +24,6 @@ const Header = ({currentUser , handleLogout}) => {
           </Link>
         )}
       </>
-      <NavLink to='/fosteradopt/new'>Adopt/Foster</NavLink><br></br>
     </nav>
     </>
   )
