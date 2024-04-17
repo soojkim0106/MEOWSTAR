@@ -13,7 +13,8 @@ class AdoptFoster(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     cat_id = db.Column(db.Integer, db.ForeignKey("cats.id"))
-    adoption_fee = db.Column(db.Integer, nullable=False)
+    adopt = db.Column(db.Boolean)
+    foster = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     
@@ -23,14 +24,6 @@ class AdoptFoster(db.Model, SerializerMixin):
     
     #serialization
     serialize_rules = ("-cat.adopt_fosters", "-user.adopt_fosters",)
-    
-    @validates("adoption_fee")
-    def validate_name(self, _, fee):
-        if not isinstance(fee, int):
-            raise TypeError("Adoption fee must be an integer!")
-        elif fee <= 0 or fee >= 200:
-            raise ValueError("Adoption fee must be greater than zero and less than 200 dollars")
-        return fee
     
     @validates("user_id")
     def validate_user_id(self, _, user_id):

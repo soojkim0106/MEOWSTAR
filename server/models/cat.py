@@ -18,6 +18,7 @@ class Cat(db.Model, SerializerMixin):
     good_with_animal = db.Column(db.Boolean)
     availability = db.Column(db.Boolean)
     fixed = db.Column(db.Boolean)
+    adoption_fee = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     
@@ -38,7 +39,8 @@ class Cat(db.Model, SerializerMixin):
                         Availability: {self.availability},
                         Fixed: {self.fixed},
                         Good with Children?: {self.good_with_children},
-                        Good with Other Animal(s)?: {self.good_with_animal}
+                        Good with Other Animal(s)?: {self.good_with_animal},
+                        Adoption Fee: {self.adoption_fee}
                         />
                         """
 
@@ -57,3 +59,12 @@ class Cat(db.Model, SerializerMixin):
         elif not (age < 20):
             raise ValueError("Age must be below 20")
         return age
+    
+    @validates("adoption_fee")
+    def validate_name(self, _, fee):
+        if not isinstance(fee, int):
+            raise TypeError("Adoption fee must be an integer!")
+        elif fee <= 0 or fee >= 200:
+            raise ValueError("Adoption fee must be greater than zero and less than 200 dollars")
+        return fee
+    

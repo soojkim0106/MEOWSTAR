@@ -51,28 +51,28 @@ const UserCard = () => {
 
   // }
 
-  return (
-    <>
-    <div>
-      <h1>Profile:</h1>
-      <h3>Username: {username}</h3>
-      <h3>Email: {email}</h3>
-    </div>
-    <br></br><br></br>
-    <div>
-        <h3>Update your profile:</h3>
-        <form onSubmit={handleSubmitForm}>
-          <input></input>
-          <button>Submit</button>
-        </form>
-    </div>
-    <br></br>
-    <div>
-        <h3>Delete your profile:</h3>
-        <button onClick={handleDeleteUser}>Delete</button>
-    </div>
-    </>
-  )
+//   return (
+//     <>
+//     <div>
+//       <h1>Profile:</h1>
+//       <h3>Username: {username}</h3>
+//       <h3>Email: {email}</h3>
+//     </div>
+//     <br></br><br></br>
+//     <div>
+//         <h3>Update your profile:</h3>
+//         <form onSubmit={handleSubmitForm}>
+//           <input></input>
+//           <button>Submit</button>
+//         </form>
+//     </div>
+//     <br></br>
+//     <div>
+//         <h3>Delete your profile:</h3>
+//         <button onClick={handleDeleteUser}>Delete</button>
+//     </div>
+//     </>
+//   )
 }
 
 export default UserCard
