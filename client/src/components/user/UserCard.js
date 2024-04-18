@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {
   useParams,
@@ -10,8 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { object, string } from "yup";
 import { useFormik, Formik } from "formik";
 import CatCard from "../cat/CatCard";
-import './UserCard.css'
-
+import "./UserCard.css";
 
 const UserCard = () => {
   const { currentUser, updateCurrentUser, handleLogout, handleEditUser } =
@@ -49,8 +47,8 @@ const UserCard = () => {
       });
     }
   }, [userId, currentUser, navigate, updateCurrentUser]);
-  
-    useEffect(() => {
+
+  useEffect(() => {
     if (currentUser) {
       fetch(`/users/${currentUser.id}`)
         .then((resp) => {
@@ -61,9 +59,11 @@ const UserCard = () => {
           }
         })
         .then((userData) => {
+          console.log(userData);
           if (userData.adopt_fosters && Array.isArray(userData.adopt_fosters)) {
             const adoptedCatIds = userData.adopt_fosters.map((adoptedCat) => {
-              return adoptedCat.id;
+              console.log(adoptedCat);
+              return adoptedCat.cat_id;
             });
             Promise.all(
               adoptedCatIds.map((catId) =>
@@ -90,23 +90,21 @@ const UserCard = () => {
     }
   }, [currentUser]);
 
+  const initialValues = {
+    email: currentUser.email,
+    username: currentUser.username,
+  };
 
-    const initialValues = {
-      email: currentUser.email,
-      username: currentUser.username,
-    }
-  
-    const formik = useFormik({
-      initialValues,
-      validationSchema: updateProfileSchema,
-      onSubmit: 
-      (formData) => { 
-          handleEditUser(formData)
-      },
-    });
+  const formik = useFormik({
+    initialValues,
+    validationSchema: updateProfileSchema,
+    onSubmit: (formData) => {
+      handleEditUser(formData);
+    },
+  });
 
-  if(!currentUser){
-    return <p>You must log in first</p>
+  if (!currentUser) {
+    return <p>You must log in first</p>;
   }
   const { username, email } = currentUser;
 
@@ -136,62 +134,69 @@ const UserCard = () => {
 
   return (
     <>
-    <div className="user-profile">
-      <div className="user-information">
-        <h1>{username}'s profile:</h1>
-        <h3>Registered Email: {email}</h3>
-      </div>
-      <div className="adopt_foster_cat_box">
-        <div className='testing'>
-          <h3>Pending Adopted/Fostered Cat:</h3>
-          {adoptedCatList.map((adoptedCat) => (
-            <CatCard cat={adoptedCat}></CatCard>
-          ))}
+      <div className="user-profile">
+        <div className="user-information">
+          <h1>{username}'s profile:</h1>
+          <h3>Registered Email: {email}</h3>
         </div>
-      </div>
-      <div className='footer'>
-        <div className="edit-profile-form">
-          <h3>Update your profile:</h3>
-          {<button onClick={toggleForm} >{showForm}Click me</button>}
-          {showForm && (
-            <form onSubmit={formik.handleSubmit}>
-              <label>Email: </label>
-              <input
-                type="text"
-                name="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                className="registration-input"
-              /> <br></br>
-              {formik.errors.email && formik.touched.email && (
-                <div className="error-message show">{formik.errors.email}</div>
-              )}
-              <label>Username: </label>
-              <input
-                type="text"
-                name="username"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.username}
-                className="registration-input"
-              />
-              {formik.errors.username && formik.touched.username && (
-                <div className="error-message show">{formik.errors.username}</div>
-              )}
-              <br></br>
-              <button type="submit" className="profile-submit">Submit</button>
-            </form>
-          )}
+        <div className="adopt_foster_cat_box">
+          <div className="testing">
+            <h3>Pending Adopted/Fostered Cat:</h3>
+            {adoptedCatList.map((adoptedCat) => (
+              <CatCard cat={adoptedCat}></CatCard>
+            ))}
+          </div>
         </div>
-        <div className="delete-user">
-          <h3>Delete your profile:</h3>
-          <button style={buttonStyle} onClick={handleDoubleCheck}>
-            {" "}
-            Delete ⚠️
-          </button>
+        <div className="footer">
+          <div className="edit-profile-form">
+            <h3>Update your profile:</h3>
+            {<button onClick={toggleForm}>{showForm}Click me</button>}
+            {showForm && (
+              <form onSubmit={formik.handleSubmit}>
+                <label>Email: </label>
+                <input
+                  type="text"
+                  name="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  className="registration-input"
+                />{" "}
+                <br></br>
+                {formik.errors.email && formik.touched.email && (
+                  <div className="error-message show">
+                    {formik.errors.email}
+                  </div>
+                )}
+                <label>Username: </label>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.username}
+                  className="registration-input"
+                />
+                {formik.errors.username && formik.touched.username && (
+                  <div className="error-message show">
+                    {formik.errors.username}
+                  </div>
+                )}
+                <br></br>
+                <button type="submit" className="profile-submit">
+                  Submit
+                </button>
+              </form>
+            )}
+          </div>
+          <div className="delete-user">
+            <h3>Delete your profile:</h3>
+            <button style={buttonStyle} onClick={handleDoubleCheck}>
+              {" "}
+              Delete ⚠️
+            </button>
+          </div>
         </div>
-      </div>
       </div>
     </>
   );

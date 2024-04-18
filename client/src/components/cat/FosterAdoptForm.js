@@ -28,6 +28,9 @@ const FosterAdoptForm = () => {
 
   const submitForm = (formData) => {
     const { id } = currentUser;
+    console.log(`formData: ${formData}`)
+    console.log(`userId: ${id}`)
+    console.log(`catId: ${catId}`)
     fetch("/adopt_fosters", {
       method: "POST",
       headers: {
