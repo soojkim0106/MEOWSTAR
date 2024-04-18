@@ -11,16 +11,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const navigate = useNavigate()
 
-//   useEffect(() => {
-//   fetch("/me")
-//   .then(resp => {
-//     if (resp.ok) {
-//       resp.json().then(updateCurrentUser)
-//     } else {
-//       toast.error("Please log in!")
-//     }
-//   })
-// }, []);
 
   useEffect(() => {
     fetch('/cats')
