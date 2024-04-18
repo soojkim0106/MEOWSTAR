@@ -146,6 +146,8 @@ class UserById(Resource):
     @login_required
     def get(self,id):
         try:
+            print(g.user)
+            print(user_schema.dump(g.user))
             if g.user:
                 return user_schema.dump(g.user), 200
         except Exception as e:
@@ -181,6 +183,7 @@ class AdoptFosters(Resource):
     def get(self):
         try:
             serialized_adopt_fosters = adopt_fosters_schema.dump(AdoptFoster.query)
+            print(serialized_adopt_fosters)
             return serialized_adopt_fosters, 200
         except Exception as e:
             return {"error": str(e)}, 404
@@ -203,7 +206,7 @@ class AdoptFosters(Resource):
 class AdoptFosterById(Resource):
     def get(self, id):
         try:
-            adopt_foster = AdoptFoster.query.filter_by(id=id).first()
+            adopt_foster = AdoptFoster.query.filter_by(cat_id=id).first()
             if adopt_foster:
                 cat_name = adopt_foster.cat.name
                 return {"cat_name": cat_name}, 200

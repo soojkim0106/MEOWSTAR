@@ -19,6 +19,8 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     adopt_fosters = fields.Nested(
         "AdoptFosterSchema",
         many=True,
+        exclude=("user",),  # Exclude the user field to avoid circular reference
+        only=("id", "adopt", "foster", "created_at", "updated_at", "cat_id"),  # Include cat_id
     )
     
     username = fields.String(required=True, validate=validate.Length(min=2,max=20))
