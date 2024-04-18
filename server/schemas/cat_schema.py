@@ -9,16 +9,8 @@ class CatSchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
         exclude = ["created_at", "updated_at"]
         
-    users = fields.Nested(
-        "UserSchema",
-        only=("id", "username", "email"),
-        # exclude=("cat",),
-    )
     
-    adopt_fosters = fields.Nested(
-        "AdoptFosterSchema",
-        many=True,
-    )
+    
         
     name = fields.String(required=True, validate=validate.Length(min=2,max=15, error="Cat name must be at between 2 to 15 characters"))
     age = fields.Integer(validate=validate.Range(min=1, max=20, error="Cat age must be minimum of 20"))
