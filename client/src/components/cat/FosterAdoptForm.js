@@ -20,11 +20,17 @@ const FosterAdoptForm = () => {
     validationSchema: Yup.object({
       adopt: Yup.boolean().required(),
       foster: Yup.boolean(),
+    }).test("at-least-one-checked", null, (values) => {
+      return values.adopt || values.foster;
     }),
     onSubmit: (formData) => {
+      if (!formData.adopt && !formData.foster) {
+        toast.error("Please select at least one option.");
+      } else {      
       submitForm(formData);
-    },
-  });
+    }
+  },
+});
 
   const submitForm = (formData) => {
     const { id } = currentUser;
@@ -72,7 +78,12 @@ const FosterAdoptForm = () => {
   return (
     <div className="foster-adopt-form">
       <h1>Interested in Adopting or Fostering?</h1>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          formik.handleSubmit(e);
+        }}
+      >
         <label>
           Adopt
           <input
@@ -93,6 +104,12 @@ const FosterAdoptForm = () => {
             checked={formik.values.foster}
           />
         </label>
+        {formik.errors.adopt && formik.touched.adopt && (
+          <div>{formik.errors.adopt}</div>
+        )}
+        {formik.errors.foster && formik.touched.foster && (
+          <div>{formik.errors.foster}</div>
+        )}
         <button type="submit">Submit</button>
       </form>
     </div>
