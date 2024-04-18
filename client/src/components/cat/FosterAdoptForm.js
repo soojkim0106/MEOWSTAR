@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { number, object } from "yup";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import './FosterAdoptForm.css'
@@ -55,8 +54,6 @@ const FosterAdoptForm = () => {
         console.error(error);
       });
   };
-
-
 
   useEffect(() => {
     fetch("/me").then((resp) => {

@@ -66,19 +66,42 @@ const CatDetail = () => {
       <h2>{name}</h2>
       {imageLoaded && imageUrl && <img src={imageUrl} alt={name} />}
       <div className="details">
-        <p>Age: {age}</p>
-        <p>Gender: {gender}</p>
-        <p>Breed: {breed}</p>
-        <p>Temperament: {temperament}</p>
-        <p>Availability: {availability ? "Yes" : "No"}</p>
-        <p>Fixed: {fixed ? "Yes" : "No"}</p>
-        <p>Good with Children: {good_with_children ? "Yes" : "No"}</p>
-        <p>Good with Animals: {good_with_animal ? "Yes" : "No"}</p>
-        <p>Adoption Fee: {adoption_fee} </p>
+        <p>
+          <strong>Age:</strong> {age}
+        </p>
+        <p>
+          <strong>Gender:</strong> {gender}
+        </p>
+        <p>
+          <strong>Breed:</strong> {breed}
+        </p>
+        <p>
+          <strong>Temperment:</strong> {temperament}
+        </p>
+        <p>
+          <strong>Availability:</strong> {availability ? "Yes" : "No"}
+        </p>
+        <p>
+          <strong>Fixed:</strong> {fixed ? "Yes" : "No"}
+        </p>
+        <p>
+          <strong>Good with Children:</strong>{" "}
+          {good_with_children ? "Yes" : "No"}
+        </p>
+        <p>
+          <strong>Good with Animals:</strong> {good_with_animal ? "Yes" : "No"}
+        </p>
+        <p>
+          <strong>Adoption Fee:</strong> {adoption_fee}{" "}
+        </p>
       </div>
       <div>
-          <h3> Would you like to adopt or foster this cat? Let us know <Link to={`/fosteradopt/${id}`}>here!</Link></h3>
-        </div>
+        <h3>
+          {" "}
+          Would you like to adopt or foster this cat? Let us know{" "}
+          <Link to={`/fosteradopt/${id}`}>here!</Link>
+        </h3>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import toast, { Toaster } from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import './Header.css'
 
 const Header = ({ currentUser, handleLogout }) => {
   return (

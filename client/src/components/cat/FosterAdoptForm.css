@@ -1,3 +1,44 @@
 .foster-adopt-form{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 20px;
+}
+
+.foster-adopt-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.foster-adopt-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.foster-adopt-form .options {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.foster-adopt-form .option {
+  margin-right: 20px;
+}
+
+.foster-adopt-form label {
+  margin-bottom: 10px;
+}
+
+.foster-adopt-form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.foster-adopt-form button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.foster-adopt-form button:hover {
+  background-color: #0056b3;
 }
