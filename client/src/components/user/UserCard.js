@@ -143,7 +143,7 @@ const UserCard = () => {
       </div>
       <div className="adopt_foster_cat_box">
         <div className='testing'>
-          <h3>Adopted/Fostered Cat:</h3>
+          <h3>Pending Adopted/Fostered Cat:</h3>
           {adoptedCatList.map((adoptedCat) => (
             <CatCard cat={adoptedCat}></CatCard>
           ))}
@@ -152,7 +152,7 @@ const UserCard = () => {
       <div className='footer'>
         <div className="edit-profile-form">
           <h3>Update your profile:</h3>
-          <button onClick={toggleForm} >{showForm}Show Form</button>
+          {<button onClick={toggleForm} >{showForm}Click me</button>}
           {showForm && (
             <form onSubmit={formik.handleSubmit}>
               <label>Email: </label>
@@ -162,7 +162,7 @@ const UserCard = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
-                className="input-email"
+                className="registration-input"
               /> <br></br>
               {formik.errors.email && formik.touched.email && (
                 <div className="error-message show">{formik.errors.email}</div>
@@ -174,7 +174,7 @@ const UserCard = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.username}
-                className="input-username"
+                className="registration-input"
               />
               {formik.errors.username && formik.touched.username && (
                 <div className="error-message show">{formik.errors.username}</div>
