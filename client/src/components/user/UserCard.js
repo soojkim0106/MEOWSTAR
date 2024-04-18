@@ -91,8 +91,8 @@ const UserCard = () => {
   }, [currentUser]);
 
   const initialValues = {
-    email: currentUser.email,
-    username: currentUser.username,
+    email: "",
+    username: "",
   };
 
   const formik = useFormik({

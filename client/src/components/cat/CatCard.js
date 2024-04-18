@@ -8,6 +8,7 @@ const CatCard = ({ cat }) => {
   // let src = useRef(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  
 
   useEffect(() => {
     if (!imageUrl)

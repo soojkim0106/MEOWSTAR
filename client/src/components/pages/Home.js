@@ -17,7 +17,7 @@ function Home() {
         toast.error("Please log in!");
       }
     });
-  }, []);
+  }, [updateCurrentUser]);
 
   return (
     <div>

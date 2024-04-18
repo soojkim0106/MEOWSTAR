@@ -69,7 +69,7 @@ const FosterAdoptForm = () => {
       if (resp.ok) {
         resp.json().then(updateCurrentUser);
       } else {
-        toast.error("Please log in");
+        // toast.error("Please log in");
         navigate("/");
       }
     });

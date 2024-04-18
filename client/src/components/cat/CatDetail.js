@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {Link, useLocation } from 'react-router-dom'
+import {Link, useLocation, useOutletContext } from 'react-router-dom'
 import toast from "react-hot-toast";
 import './CatDetail.css'
 
@@ -9,6 +9,18 @@ const CatDetail = () => {
 
   const [imageUrl, setImageUrl] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  
+  const { updateCurrentUser } = useOutletContext();
+
+  useEffect(() => {
+    fetch("/me").then((resp) => {
+      if (resp.ok) {
+        resp.json().then(updateCurrentUser);
+      } else {
+        // toast.error("Please log in!");
+      }
+    });
+  }, [updateCurrentUser]);
 
   useEffect(() => {
     if (!imageUrl)
@@ -30,17 +42,6 @@ const CatDetail = () => {
     };
   }, []);
 
-
-  // useEffect(() => {
-  //   fetch(`/cats/${catId}`)
-  //   .then(resp => {
-  //       if (resp.ok){
-  //           return resp.json().then(setCat)
-  //       }
-  //       return resp.json().then(errorObj => toast.error(errorObj.message))
-  //   })
-  //   .catch(error => console.log(error))
-  // }, [catId])
 
   if(!cat){
     return <h2>Loading...</h2>

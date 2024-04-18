@@ -7,13 +7,6 @@ const CatContainer = () => {
     // const [cats, setCats] = useState([])
     const { cats } = useOutletContext()
 
-    // useEffect(() => {
-    //     fetch('/cats')
-    //         .then((resp) => resp.json())
-    //         .then((data) => setCats(data))
-    //         .catch((error) => console.log("Error fetching cats", error))
-    // }, []);
-
   return (
     <div>
         <p></p>
