@@ -10,7 +10,7 @@ const Header = ({ currentUser, handleLogout }) => {
     <div className='navigation'>
       <nav className="navbar">
 
-        <NavLink to='/'>Home</NavLink> <br></br>
+        <NavLink to='/'>Meowstar</NavLink> <br></br>
         <>
           {currentUser ? (
             <div className="container">

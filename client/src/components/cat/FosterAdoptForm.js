@@ -18,7 +18,7 @@ const FosterAdoptForm = () => {
       foster: false,
     },
     validationSchema: Yup.object({
-      adopt: Yup.boolean(),
+      adopt: Yup.boolean().required(),
       foster: Yup.boolean(),
     }),
     onSubmit: (formData) => {
